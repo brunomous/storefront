@@ -22,6 +22,7 @@ function Home(): JSX.Element {
 
   return (
     <div>
+      <h1>Products</h1>
       {products.map(({ id, title }, index: number) => (
         <Link key={`product_${id}_${index}`} to={`/product/${id}`}>
           {title}
