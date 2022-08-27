@@ -1,11 +1,12 @@
 import type { ChangeEvent } from 'react'
+import type { Product as ProductType } from '../../types/Product'
 
 import { useQuery } from '@tanstack/react-query'
 import { useCallback, useMemo, useState } from 'react'
 
-import api from '../../api'
+import { useCartContext } from '../../context/CartContext'
 
-import { Product as ProductType } from '../../types/Product'
+import api from '../../api'
 
 import Wrapper from '../../components/Wrapper'
 import Input from '../../components/Input'
@@ -19,6 +20,12 @@ function Home(): JSX.Element {
     ['products'],
     async () => await api.get('/products'),
   )
+
+  const {
+    cartItems,
+    isItemOnCart,
+    toggleCartItem,
+  } = useCartContext()
 
   const handleSearch = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value)
@@ -42,12 +49,14 @@ function Home(): JSX.Element {
 
   return (
     <Wrapper>
-      <h1>Products</h1>
+      <h1>Products ({cartItems.length} products on cart)</h1>
       <Input placeholder='Search' value={search} onChange={handleSearch} />
       <ProductGrid>
         {filteredProducts.map((product, index: number) => (
           <ProductCard
             key={`product_${product.id}_${index}`}
+            isItemOnCart={isItemOnCart(product.id)}
+            handleButtonClick={() => toggleCartItem(product)}
             {...product}
           />
         ))}

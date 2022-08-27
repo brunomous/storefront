@@ -1,9 +1,16 @@
-import { Product as ProductType } from '../../types/Product'
+import type { Product as ProductType } from '../../types/Product'
+import type { MouseEvent } from 'react'
+
 import { Link } from 'react-router-dom'
 
 import Button from '../Button'
 
 import styles from './styles.module.scss'
+
+interface Props extends ProductType {
+  isItemOnCart: boolean
+  handleButtonClick: (event: MouseEvent<HTMLButtonElement>) => void
+}
 
 function ProductCard({
   id,
@@ -11,7 +18,9 @@ function ProductCard({
   category,
   price,
   image,
-}: ProductType): JSX.Element {
+  isItemOnCart,
+  handleButtonClick,
+}: Props): JSX.Element {
   return (
     <div className={styles.wrapper}>
       <img className={styles.image} src={image} alt={title} />
@@ -22,7 +31,9 @@ function ProductCard({
         </Link>
         <p className={styles.price}>{price}</p>
       </div>
-      <Button>add to card</Button>
+      <Button onClick={handleButtonClick}>
+        {isItemOnCart ? 'remove from cart' : 'add to cart'}
+      </Button>
   </div>
   )
 }

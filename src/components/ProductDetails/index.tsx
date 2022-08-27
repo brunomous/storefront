@@ -1,8 +1,14 @@
-import { Product as ProductType } from '../../types/Product'
+import type { Product as ProductType } from '../../types/Product'
+import { MouseEvent } from 'react'
 
 import Button from '../Button'
 
 import styles from './styles.module.scss'
+
+interface Props extends ProductType {
+  isItemOnCart: boolean
+  handleButtonClick: (event: MouseEvent<HTMLButtonElement>) => void
+}
 
 function ProductDetails({
   image,
@@ -10,7 +16,9 @@ function ProductDetails({
   category,
   description,
   price,
-}: ProductType): JSX.Element {
+  isItemOnCart,
+  handleButtonClick,
+}: Props): JSX.Element {
   return (
     <div className={styles.container}>
       <img src={image} alt={title} />
@@ -18,7 +26,9 @@ function ProductDetails({
         <p>{category}</p>
         <p>{description}</p>
         <p>{price}</p>
-        <Button>add to cart</Button>
+        <Button onClick={handleButtonClick}>
+          {isItemOnCart ? 'remove from cart' : 'add to cart'}
+        </Button>
       </div>
     </div>
   )
