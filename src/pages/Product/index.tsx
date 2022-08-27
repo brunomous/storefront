@@ -7,6 +7,7 @@ import api from '../../api'
 import { Product as ProductType } from '../../types/Product'
 
 import Wrapper from '../../components/Wrapper'
+import ProductDetails from '../../components/ProductDetails'
 
 function Product(): JSX.Element {
   const { id } = useParams()
@@ -27,6 +28,7 @@ function Product(): JSX.Element {
   return (
     <Wrapper>
       <h1>{product.title}</h1>
+      <ProductDetails {...product} />
     </Wrapper>
   )
 }
