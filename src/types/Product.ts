@@ -1,10 +1,10 @@
 export interface Rating {
-  rate: string
+  rate: number
   count: number
 }
 
 export interface Product {
-  id: string
+  id: number
   title: string
   price: number
   description: string
