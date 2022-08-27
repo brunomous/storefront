@@ -6,6 +6,8 @@ import api from '../../api'
 
 import { Product as ProductType } from '../../types/Product'
 
+import Wrapper from '../../components/Wrapper'
+
 function Product(): JSX.Element {
   const { id } = useParams()
 
@@ -23,7 +25,9 @@ function Product(): JSX.Element {
   }
 
   return (
-    <div>Product {id}: {product.title}</div>
+    <Wrapper>
+      <h1>{product.title}</h1>
+    </Wrapper>
   )
 }
 

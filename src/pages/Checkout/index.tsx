@@ -1,6 +1,10 @@
+import Wrapper from '../../components/Wrapper'
+
 function Checkout(): JSX.Element {
   return (
-    <div>Checkout</div>
+    <Wrapper>
+      <h1>Checkout</h1>
+    </Wrapper>
   )
 }
 

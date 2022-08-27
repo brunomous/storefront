@@ -1,0 +1,34 @@
+@import '../../theme/spacing.scss';
+@import '../../theme/typography.scss';
+@import '../../theme/colors.scss';
+
+.wrapper {
+  padding: $md;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.image {
+  max-width: 300px;
+  max-height: 300px;
+}
+
+.info {
+  width: 100%;
+  margin-top: auto;
+}
+
+.category {
+  font-size: $sm;
+}
+
+.title {
+  text-decoration: underline;
+  color: $black;
+}
+
+.price {
+  font-weight: $semibold;
+}

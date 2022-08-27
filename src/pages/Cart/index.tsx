@@ -1,6 +1,10 @@
+import Wrapper from '../../components/Wrapper'
+
 function Cart(): JSX.Element {
   return (
-    <div>Cart</div>
+    <Wrapper>
+      <h1>Cart</h1>
+    </Wrapper>
   )
 }
 

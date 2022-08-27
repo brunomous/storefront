@@ -1,10 +1,13 @@
 import { useQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
-import { Link } from 'react-router-dom'
 
 import api from '../../api'
 
 import { Product as ProductType } from '../../types/Product'
+
+import Wrapper from '../../components/Wrapper'
+import ProductGrid from '../../components/ProductGrid'
+import ProductCard from '../../components/ProductCard'
 
 function Home(): JSX.Element {
   const { isLoading, data } = useQuery(
@@ -21,14 +24,17 @@ function Home(): JSX.Element {
   }
 
   return (
-    <div>
+    <Wrapper>
       <h1>Products</h1>
-      {products.map(({ id, title }, index: number) => (
-        <Link key={`product_${id}_${index}`} to={`/product/${id}`}>
-          {title}
-        </Link>
-      ))}
-    </div>
+      <ProductGrid>
+        {products.map((product, index: number) => (
+          <ProductCard
+            key={`product_${product.id}_${index}`}
+            {...product}
+          />
+        ))}
+      </ProductGrid>
+    </Wrapper>
   )
 }
 
