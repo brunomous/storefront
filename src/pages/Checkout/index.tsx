@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import { ArrowLeft } from 'react-feather'
 import { loadStripe, StripeCardElement } from '@stripe/stripe-js'
 import {
   Elements,
@@ -11,6 +11,7 @@ import {
 import { useCartContext } from '../../context/CartContext'
 
 import Wrapper from '../../components/Wrapper'
+import Link from '../../components/Link'
 import Button from '../../components/Button'
 
 const stripeLib = loadStripe(process.env.REACT_APP_PUBLIC_STRIPE_KEY ?? '')
@@ -48,7 +49,7 @@ function CheckoutForm(): JSX.Element {
 
   return (
     <Wrapper>
-      <Link to="/cart">go back</Link>
+      <Link to="/cart"><ArrowLeft /> Back</Link>
       <h1>Checkout</h1>
       {cartItems.map((product, index: number) => (
         <div key={`item_${product.id}_${index}`}>

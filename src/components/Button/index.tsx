@@ -4,6 +4,7 @@ import styles from './styles.module.scss'
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement>{
   children: ReactNode
+  variant?: 'fill' | 'outline' | 'transparent'
 }
 
 function Button({ children, ...buttonProps }: Props): JSX.Element {

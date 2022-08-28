@@ -1,11 +1,12 @@
-import { Link } from 'react-router-dom'
 import { useMemo } from 'react'
+import { ArrowLeft } from 'react-feather'
 
 import { formatCurrency } from '../../utils/currency'
 
 import { useCartContext } from '../../context/CartContext'
 
 import Wrapper from '../../components/Wrapper'
+import Link from '../../components/Link'
 import Button from '../../components/Button'
 
 function Cart(): JSX.Element {
@@ -22,7 +23,7 @@ function Cart(): JSX.Element {
 
   return (
     <Wrapper>
-      <Link to="/">go back</Link>
+      <Link to="/"><ArrowLeft /> Back</Link>
       <h1>Cart</h1>
       {cartItems.map((product, index: number) => (
         <div key={`item_${product.id}_${index}`}>
@@ -33,7 +34,9 @@ function Cart(): JSX.Element {
         </div>
       ))}
       <h3><>Total: {formatCurrency(totalPrice)}</></h3>
-      <Link to="/checkout">begin checkout</Link>
+      <Link to="/checkout">
+        Begin checkout
+      </Link>
     </Wrapper>
   )
 }

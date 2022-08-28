@@ -3,13 +3,13 @@ import type { Product } from '../../types/Product'
 
 import { useQuery } from '@tanstack/react-query'
 import { useCallback, useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
 
 import { useCartContext } from '../../context/CartContext'
 
 import api from '../../api'
 
 import Wrapper from '../../components/Wrapper'
+import Header from '../../components/Header'
 import Input from '../../components/Input'
 import Grid from '../../components/Grid'
 import ProductCard from '../../components/ProductCard'
@@ -23,7 +23,6 @@ function Home(): JSX.Element {
   )
 
   const {
-    cartItems,
     isItemOnCart,
     toggleCartItem,
   } = useCartContext()
@@ -49,23 +48,22 @@ function Home(): JSX.Element {
   }
 
   return (
-    <Wrapper>
-      <h1>
-        Products ({cartItems.length} products on cart){' '}
-        <Link to={'/cart'}>view cart</Link>
-      </h1>
-      <Input placeholder='Search' value={search} onChange={handleSearch} />
-      <Grid>
-        {filteredProducts.map((product, index: number) => (
-          <ProductCard
-            key={`product_${product.id}_${index}`}
-            isItemOnCart={isItemOnCart(product.id)}
-            handleButtonClick={() => toggleCartItem(product)}
-            {...product}
-          />
-        ))}
-      </Grid>
-    </Wrapper>
+    <div>
+      <Header />
+      <Wrapper>
+        <Input placeholder='Search products' value={search} onChange={handleSearch} />
+        <Grid>
+          {filteredProducts.map((product, index: number) => (
+            <ProductCard
+              key={`product_${product.id}_${index}`}
+              isItemOnCart={isItemOnCart(product.id)}
+              handleButtonClick={() => toggleCartItem(product)}
+              {...product}
+            />
+          ))}
+        </Grid>
+      </Wrapper>
+    </div>
   )
 }
 

@@ -1,0 +1,10 @@
+@import '../../theme/colors.scss';
+@import '../../theme/spacing.scss';
+
+.link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: $black;
+  gap: $sm;
+}

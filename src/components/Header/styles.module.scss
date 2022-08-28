@@ -1,0 +1,23 @@
+@import '../../theme/colors.scss';
+@import '../../theme/spacing.scss';
+
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: $lg;
+}
+
+.indicator {
+  height: $lg;
+  width: $lg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $accent;
+  color: $white;
+  border-radius: 50%;
+}
