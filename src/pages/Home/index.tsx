@@ -10,6 +10,7 @@ import api from '../../api'
 
 import Wrapper from '../../components/Wrapper'
 import Header from '../../components/Header'
+import Loading from '../../components/Loading'
 import Input from '../../components/Input'
 import Grid from '../../components/Grid'
 import ProductCard from '../../components/ProductCard'
@@ -44,7 +45,7 @@ function Home(): JSX.Element {
   }, [products, search])
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <Loading>Loading products...</Loading>
   }
 
   return (

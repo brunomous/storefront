@@ -10,6 +10,7 @@ import { useCartContext } from '../../context/CartContext'
 import api from '../../api'
 
 import Wrapper from '../../components/Wrapper'
+import Loading from '../../components/Loading'
 import Link from '../../components/Link'
 import ProductDetails from '../../components/ProductDetails'
 
@@ -31,7 +32,7 @@ function Product(): JSX.Element {
   }, [data])
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <Loading>Loading product...</Loading>
   }
 
   return (
