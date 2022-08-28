@@ -10,7 +10,7 @@ import api from '../../api'
 
 import Wrapper from '../../components/Wrapper'
 import Input from '../../components/Input'
-import ProductGrid from '../../components/ProductGrid'
+import Grid from '../../components/Grid'
 import ProductCard from '../../components/ProductCard'
 
 function Home(): JSX.Element {
@@ -51,7 +51,7 @@ function Home(): JSX.Element {
     <Wrapper>
       <h1>Products ({cartItems.length} products on cart)</h1>
       <Input placeholder='Search' value={search} onChange={handleSearch} />
-      <ProductGrid>
+      <Grid>
         {filteredProducts.map((product, index: number) => (
           <ProductCard
             key={`product_${product.id}_${index}`}
@@ -60,7 +60,7 @@ function Home(): JSX.Element {
             {...product}
           />
         ))}
-      </ProductGrid>
+      </Grid>
     </Wrapper>
   )
 }

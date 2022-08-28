@@ -6,7 +6,7 @@ interface Props {
   children: ReactNode
 }
 
-function ProductGrid({ children }: Props): JSX.Element {
+function Grid({ children }: Props): JSX.Element {
   return (
     <div className={styles.grid}>
       {children}
@@ -14,4 +14,4 @@ function ProductGrid({ children }: Props): JSX.Element {
   )
 }
 
-export default ProductGrid
+export default Grid
