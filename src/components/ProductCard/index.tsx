@@ -36,7 +36,7 @@ function ProductCard({
       <Button onClick={handleButtonClick}>
         {isItemOnCart ? 'remove from cart' : 'add to cart'}
       </Button>
-  </div>
+    </div>
   )
 }
 
