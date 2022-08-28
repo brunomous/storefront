@@ -1,11 +1,11 @@
-import type { Product as ProductType } from '../../types/Product'
+import type { Product } from '../../types/Product'
 import { MouseEvent } from 'react'
 
 import Button from '../Button'
 
 import styles from './styles.module.scss'
 
-interface Props extends ProductType {
+interface Props extends Product {
   isItemOnCart: boolean
   handleButtonClick: (event: MouseEvent<HTMLButtonElement>) => void
 }

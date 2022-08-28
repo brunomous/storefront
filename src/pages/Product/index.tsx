@@ -1,4 +1,4 @@
-import type { Product as ProductType } from '../../types/Product'
+import type { Product as ProductInterface } from '../../types/Product'
 
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
@@ -24,7 +24,7 @@ function Product(): JSX.Element {
     toggleCartItem,
   } = useCartContext()
 
-  const product: ProductType = useMemo(() => {
+  const product: ProductInterface = useMemo(() => {
     return data?.data
   }, [data])
 

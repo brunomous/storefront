@@ -1,5 +1,5 @@
 import type { ChangeEvent } from 'react'
-import type { Product as ProductType } from '../../types/Product'
+import type { Product } from '../../types/Product'
 
 import { useQuery } from '@tanstack/react-query'
 import { useCallback, useMemo, useState } from 'react'
@@ -31,11 +31,11 @@ function Home(): JSX.Element {
     setSearch(event.target.value)
   }, [setSearch])
 
-  const products: ProductType[] = useMemo(() => {
+  const products: Product[] = useMemo(() => {
     return data?.data ?? []
   }, [data])
 
-  const filteredProducts: ProductType[] = useMemo(() => {
+  const filteredProducts: Product[] = useMemo(() => {
     return products.filter(
       ({ title }) => title.toLowerCase().includes(
         search.toLowerCase(),
