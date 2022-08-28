@@ -3,6 +3,8 @@ import type { MouseEvent } from 'react'
 
 import { Link } from 'react-router-dom'
 
+import { formatCurrency } from '../../utils/currency'
+
 import Button from '../Button'
 
 import styles from './styles.module.scss'
@@ -29,7 +31,7 @@ function ProductCard({
         <Link className={styles.title} to={`/product/${id}`}>
           {title}
         </Link>
-        <p className={styles.price}>{price}</p>
+        <h3 className={styles.price}>{formatCurrency(price)}</h3>
       </div>
       <Button onClick={handleButtonClick}>
         {isItemOnCart ? 'remove from cart' : 'add to cart'}

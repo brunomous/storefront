@@ -1,4 +1,7 @@
 import { Link } from 'react-router-dom'
+import { useMemo } from 'react'
+
+import { formatCurrency } from '../../utils/currency'
 
 import { useCartContext } from '../../context/CartContext'
 
@@ -10,6 +13,12 @@ function Cart(): JSX.Element {
     cartItems,
     toggleCartItem,
   } = useCartContext()
+
+  const totalPrice = useMemo(() => {
+    return cartItems.reduce((sum, item) => {
+      return sum + item.price
+    }, 0)
+  }, [cartItems])
 
   return (
     <Wrapper>
@@ -23,6 +32,7 @@ function Cart(): JSX.Element {
           </Button>
         </div>
       ))}
+      <h3><>Total: {formatCurrency(totalPrice)}</></h3>
       <Link to="/checkout">begin checkout</Link>
     </Wrapper>
   )

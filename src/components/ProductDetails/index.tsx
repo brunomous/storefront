@@ -1,6 +1,8 @@
 import type { Product } from '../../types/Product'
 import { MouseEvent } from 'react'
 
+import { formatCurrency } from '../../utils/currency'
+
 import Button from '../Button'
 
 import styles from './styles.module.scss'
@@ -25,7 +27,7 @@ function ProductDetails({
       <div>
         <p>{category}</p>
         <p>{description}</p>
-        <p>{price}</p>
+        <p>{formatCurrency(price)}</p>
         <Button onClick={handleButtonClick}>
           {isItemOnCart ? 'remove from cart' : 'add to cart'}
         </Button>
