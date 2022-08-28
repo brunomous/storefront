@@ -1,12 +1,50 @@
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { loadStripe, StripeCardElement } from '@stripe/stripe-js'
+import {
+  Elements,
+  CardElement,
+  useStripe,
+  useElements,
+} from '@stripe/react-stripe-js'
 
 import { useCartContext } from '../../context/CartContext'
 
 import Wrapper from '../../components/Wrapper'
 import Button from '../../components/Button'
 
-function Checkout(): JSX.Element {
-  const { cartItems } = useCartContext()
+const stripeLib = loadStripe(process.env.REACT_APP_PUBLIC_STRIPE_KEY ?? '')
+
+function CheckoutForm(): JSX.Element {
+  const [isOrderPlaced, setIsOrderPlaced] = useState<boolean>(false)
+
+  const { cartItems, clearCart } = useCartContext()
+
+  const stripe = useStripe()
+  const elements = useElements()
+
+  const placeOrder = async () => {
+    if (stripe !== null) {
+      const { paymentMethod } = await stripe.createPaymentMethod({
+        type: 'card',
+        card: (elements?.getElement(CardElement) as StripeCardElement),
+      })
+
+      if (paymentMethod !== undefined) {
+        setIsOrderPlaced(true)
+        clearCart()
+      }
+    }
+  }
+
+  if (isOrderPlaced) {
+    return (
+      <div>
+        <h2>Order placed! Go back to Products page to buy more!</h2>
+        <Link to="/" replace>go back</Link>
+      </div>
+    )
+  }
 
   return (
     <Wrapper>
@@ -17,8 +55,18 @@ function Checkout(): JSX.Element {
           <h3>{product.title}</h3>
         </div>
       ))}
-      <Button>check out now</Button>
+      <CardElement />
+      {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
+      <Button onClick={placeOrder}>check out now</Button>
     </Wrapper>
+  )
+}
+
+function Checkout(): JSX.Element {
+  return (
+    <Elements stripe={stripeLib}>
+      <CheckoutForm />
+    </Elements>
   )
 }
 

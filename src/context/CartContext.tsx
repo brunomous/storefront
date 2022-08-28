@@ -7,6 +7,7 @@ interface ContextInterface {
   cartItems: Product[]
   isItemOnCart: (itemId: Product['id']) => boolean
   toggleCartItem: (item: Product) => void
+  clearCart: () => void
 }
 
 interface ContextProviderProps {
@@ -32,12 +33,17 @@ function CartContextProvider({
     )
   }, [isItemOnCart, setCartItems, cartItems])
 
+  const clearCart = useCallback(() => {
+    setCartItems([])
+  }, [setCartItems])
+
   return (
     <CartContext.Provider
       value={{
         cartItems,
         isItemOnCart,
         toggleCartItem,
+        clearCart,
       }}
     >
       {children}
