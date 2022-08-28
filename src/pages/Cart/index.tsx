@@ -1,9 +1,29 @@
+import { Link } from 'react-router-dom'
+
+import { useCartContext } from '../../context/CartContext'
+
 import Wrapper from '../../components/Wrapper'
+import Button from '../../components/Button'
 
 function Cart(): JSX.Element {
+  const {
+    cartItems,
+    toggleCartItem,
+  } = useCartContext()
+
   return (
     <Wrapper>
+      <Link to="/">go back</Link>
       <h1>Cart</h1>
+      {cartItems.map((product, index: number) => (
+        <div key={`item_${product.id}_${index}`}>
+          <h3>{product.title}</h3>
+          <Button onClick={() => toggleCartItem(product)}>
+            remove from cart
+          </Button>
+        </div>
+      ))}
+      <Link to="/checkout">begin checkout</Link>
     </Wrapper>
   )
 }

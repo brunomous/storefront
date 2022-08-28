@@ -3,6 +3,7 @@ import type { Product } from '../../types/Product'
 
 import { useQuery } from '@tanstack/react-query'
 import { useCallback, useMemo, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import { useCartContext } from '../../context/CartContext'
 
@@ -49,7 +50,10 @@ function Home(): JSX.Element {
 
   return (
     <Wrapper>
-      <h1>Products ({cartItems.length} products on cart)</h1>
+      <h1>
+        Products ({cartItems.length} products on cart){' '}
+        <Link to={'/cart'}>view cart</Link>
+      </h1>
       <Input placeholder='Search' value={search} onChange={handleSearch} />
       <Grid>
         {filteredProducts.map((product, index: number) => (
