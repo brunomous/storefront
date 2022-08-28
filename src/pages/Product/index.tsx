@@ -3,12 +3,14 @@ import type { Product as ProductInterface } from '../../types/Product'
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
 import { useMemo } from 'react'
+import { ArrowLeft } from 'react-feather'
 
 import { useCartContext } from '../../context/CartContext'
 
 import api from '../../api'
 
 import Wrapper from '../../components/Wrapper'
+import Link from '../../components/Link'
 import ProductDetails from '../../components/ProductDetails'
 
 function Product(): JSX.Element {
@@ -34,6 +36,7 @@ function Product(): JSX.Element {
 
   return (
     <Wrapper>
+      <Link to="/"><ArrowLeft /> Back</Link>
       <h1>{product.title}</h1>
       <ProductDetails
         {...product}

@@ -23,11 +23,11 @@ function ProductDetails({
 }: Props): JSX.Element {
   return (
     <div className={styles.container}>
-      <img src={image} alt={title} />
-      <div>
+      <img className={styles.image} src={image} alt={title} />
+      <div className={styles.info}>
         <p>{category}</p>
         <p>{description}</p>
-        <p>{formatCurrency(price)}</p>
+        <h3>{formatCurrency(price)}</h3>
         <Button onClick={handleButtonClick}>
           {isItemOnCart ? 'remove from cart' : 'add to cart'}
         </Button>

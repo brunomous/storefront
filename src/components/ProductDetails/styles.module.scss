@@ -1,8 +1,23 @@
+@import '../../theme/spacing.scss';
+
 .container {
   display: flex;
   flex-direction: row;
+  gap: $lg;
+  margin-top: $xxl;
 
   @media screen and (max-width: 1200px) {
     flex-direction: column;
   }
+}
+
+.image {
+  flex: 1;
+  max-height: 600px;
+  max-width: 600px;
+  object-fit: contain;
+}
+
+.info {
+  flex: 1;
 }
