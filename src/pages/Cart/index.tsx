@@ -7,7 +7,7 @@ import { useCartContext } from '../../context/CartContext'
 
 import Wrapper from '../../components/Wrapper'
 import Link from '../../components/Link'
-import Button from '../../components/Button'
+import ProductCard from '../../components/ProductCard'
 
 function Cart(): JSX.Element {
   const {
@@ -26,15 +26,12 @@ function Cart(): JSX.Element {
       <Link to="/"><ArrowLeft /> Back</Link>
       <h1>Cart</h1>
       {cartItems.map((product, index: number) => (
-        <div key={`item_${product.id}_${index}`}>
-          <h3>{product.title}</h3>
-          <Button
-            onClick={() => toggleCartItem(product)}
-            variant="transparent"
-          >
-            remove from cart
-          </Button>
-        </div>
+        <ProductCard
+          key={`item_${product.id}_${index}`}
+          isItemOnCart
+          handleButtonClick={() => toggleCartItem(product)}
+          {...product}
+        />
       ))}
       <h3><>Total: {formatCurrency(totalPrice)}</></h3>
       <Link to="/checkout">
