@@ -7,6 +7,7 @@ import {
   useStripe,
   useElements,
 } from '@stripe/react-stripe-js'
+import { BeatLoader } from 'react-spinners'
 
 import { useCartContext } from '../../context/CartContext'
 
@@ -21,6 +22,7 @@ import OrderPlaced from '../../components/OrderPlaced'
 const stripeLib = loadStripe(process.env.REACT_APP_PUBLIC_STRIPE_KEY ?? '')
 
 function CheckoutForm(): JSX.Element {
+  const [isLoadingCheckout, setIsLoadingCheckout] = useState<boolean>(false)
   const [isOrderPlaced, setIsOrderPlaced] = useState<boolean>(false)
 
   const { cartItems, clearCart } = useCartContext()
@@ -30,10 +32,14 @@ function CheckoutForm(): JSX.Element {
 
   const placeOrder = async () => {
     if (stripe !== null) {
+      setIsLoadingCheckout(true)
+
       const { paymentMethod } = await stripe.createPaymentMethod({
         type: 'card',
         card: (elements?.getElement(CardElement) as StripeCardElement),
       })
+
+      setIsLoadingCheckout(false)
 
       if (paymentMethod !== undefined) {
         setIsOrderPlaced(true)
@@ -65,8 +71,12 @@ function CheckoutForm(): JSX.Element {
       <CardElementWrapper>
         <CardElement />
       </CardElementWrapper>
-      {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-      <Button onClick={placeOrder}>check out now</Button>
+      <Button
+        /* eslint-disable-next-line @typescript-eslint/no-misused-promises */
+        onClick={placeOrder}
+      >
+        {isLoadingCheckout ? <BeatLoader color="white" /> : 'check out now'}
+      </Button>
     </Wrapper>
   )
 }
