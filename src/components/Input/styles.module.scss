@@ -1,5 +1,26 @@
 @import '../../theme/spacing.scss';
+@import '../../theme/colors.scss';
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  border: 2px solid rgba($black, 80%);
+  border-radius: $xs;
+}
+
+.marginTop {
+  margin-bottom: $lg;
+}
+
+.marginBottom {
+  margin-bottom: $lg;
+}
 
 .input {
+  height: $lg;
+  width: 100%;
   padding: $sm;
+  outline: none;
+  border: none;
+  box-shadow: none;
 }

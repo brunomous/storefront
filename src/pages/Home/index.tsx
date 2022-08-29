@@ -52,7 +52,12 @@ function Home(): JSX.Element {
     <div>
       <Header />
       <Wrapper>
-        <Input placeholder='Search products' value={search} onChange={handleSearch} />
+        <Input
+          placeholder='Search products'
+          value={search}
+          onChange={handleSearch}
+          hasTopMargin
+        />
         <Grid>
           {filteredProducts.map((product, index: number) => (
             <ProductCard
