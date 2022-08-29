@@ -1,5 +1,7 @@
 import type { ReactNode, ButtonHTMLAttributes } from 'react'
 
+import classNames from 'classnames'
+
 import styles from './styles.module.scss'
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement>{
@@ -7,9 +9,16 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement>{
   variant?: 'fill' | 'outline' | 'transparent'
 }
 
-function Button({ children, ...buttonProps }: Props): JSX.Element {
+function Button({ children, variant, ...buttonProps }: Props): JSX.Element {
   return (
-    <button className={styles.button} {...buttonProps}>
+    <button
+      className={classNames({
+        [styles.button]: true,
+        [styles.outline]: variant === 'outline',
+        [styles.transparent]: variant === 'transparent',
+      })}
+      {...buttonProps}
+    >
       {children}
     </button>
   )

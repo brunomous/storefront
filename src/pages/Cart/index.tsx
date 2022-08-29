@@ -28,7 +28,10 @@ function Cart(): JSX.Element {
       {cartItems.map((product, index: number) => (
         <div key={`item_${product.id}_${index}`}>
           <h3>{product.title}</h3>
-          <Button onClick={() => toggleCartItem(product)}>
+          <Button
+            onClick={() => toggleCartItem(product)}
+            variant="transparent"
+          >
             remove from cart
           </Button>
         </div>

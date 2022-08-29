@@ -1,5 +1,28 @@
+@import '../../theme/spacing.scss';
+@import '../../theme/colors.scss';
+
 .button {
   height: 40px;
   width: 100%;
   max-width: 370px;
+  outline: none;
+  border: none;
+  box-shadow: none;
+  border-radius: $xs;
+  background-color: $accent;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: $white;
+}
+
+.outline {
+  background-color: transparent;
+  border: 2px solid $black;
+  color: $black;
+}
+
+.transparent {
+  background-color: transparent;
+  border: none;
+  color: $black;
 }
