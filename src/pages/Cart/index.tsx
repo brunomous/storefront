@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { ArrowLeft } from 'react-feather'
+import { ArrowLeft, ArrowRight } from 'react-feather'
 
 import { formatCurrency } from '../../utils/currency'
 
@@ -46,8 +46,9 @@ function Cart(): JSX.Element {
             ))}
           </Grid>
           <h2><>Total: {formatCurrency(totalPrice)}</></h2>
-          <Link to="/checkout">
-            Begin checkout
+          <Link to="/checkout" underline bold>
+            <h3>Begin checkout</h3>
+            <ArrowRight />
           </Link>
         </>
           )}
