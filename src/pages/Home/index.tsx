@@ -14,6 +14,7 @@ import Loading from '../../components/Loading'
 import Input from '../../components/Input'
 import Grid from '../../components/Grid'
 import ProductCard from '../../components/ProductCard'
+import EmptyState from '../../components/EmptyState'
 
 function Home(): JSX.Element {
   const [search, setSearch] = useState<string>('')
@@ -58,16 +59,24 @@ function Home(): JSX.Element {
           onChange={handleSearch}
           hasTopMargin
         />
-        <Grid>
-          {filteredProducts.map((product, index: number) => (
-            <ProductCard
-              key={`product_${product.id}_${index}`}
-              isItemOnCart={isItemOnCart(product.id)}
-              handleButtonClick={() => toggleCartItem(product)}
-              {...product}
-            />
-          ))}
-        </Grid>
+        {Boolean(search) && (filteredProducts.length === 0)
+          ? (
+          <EmptyState>
+            No products were found with provided criteria.
+          </EmptyState>
+            )
+          : (
+          <Grid>
+            {filteredProducts.map((product, index: number) => (
+              <ProductCard
+                key={`product_${product.id}_${index}`}
+                isItemOnCart={isItemOnCart(product.id)}
+                handleButtonClick={() => toggleCartItem(product)}
+                {...product}
+              />
+            ))}
+          </Grid>
+            )}
       </Wrapper>
     </div>
   )

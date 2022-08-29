@@ -9,6 +9,7 @@ import Wrapper from '../../components/Wrapper'
 import Link from '../../components/Link'
 import Grid from '../../components/Grid'
 import ProductCard from '../../components/ProductCard'
+import EmptyState from '../../components/EmptyState'
 
 function Cart(): JSX.Element {
   const {
@@ -26,20 +27,30 @@ function Cart(): JSX.Element {
     <Wrapper>
       <Link to="/"><ArrowLeft /> Back</Link>
       <h1>Cart</h1>
-      <Grid>
-        {cartItems.map((product, index: number) => (
-          <ProductCard
-            key={`item_${product.id}_${index}`}
-            isItemOnCart
-            handleButtonClick={() => toggleCartItem(product)}
-            {...product}
-          />
-        ))}
-      </Grid>
-      <h2><>Total: {formatCurrency(totalPrice)}</></h2>
-      <Link to="/checkout">
-        Begin checkout
-      </Link>
+      {cartItems.length === 0
+        ? (
+        <EmptyState>
+          No products in the cart.
+        </EmptyState>
+          )
+        : (
+        <>
+          <Grid>
+            {cartItems.map((product, index: number) => (
+              <ProductCard
+                key={`item_${product.id}_${index}`}
+                isItemOnCart
+                handleButtonClick={() => toggleCartItem(product)}
+                {...product}
+              />
+            ))}
+          </Grid>
+          <h2><>Total: {formatCurrency(totalPrice)}</></h2>
+          <Link to="/checkout">
+            Begin checkout
+          </Link>
+        </>
+          )}
     </Wrapper>
   )
 }
