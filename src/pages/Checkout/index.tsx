@@ -71,10 +71,7 @@ function CheckoutForm(): JSX.Element {
       <CardElementWrapper>
         <CardElement />
       </CardElementWrapper>
-      <Button
-        /* eslint-disable-next-line @typescript-eslint/no-misused-promises */
-        onClick={placeOrder}
-      >
+      <Button onClick={placeOrder}>
         {isLoadingCheckout ? <BeatLoader color="white" /> : 'check out now'}
       </Button>
     </Wrapper>
