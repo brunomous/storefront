@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { ArrowLeft } from 'react-feather'
 import { loadStripe, StripeCardElement } from '@stripe/stripe-js'
 import {
@@ -10,9 +10,13 @@ import {
 
 import { useCartContext } from '../../context/CartContext'
 
+import { formatCurrency } from '../../utils/currency'
+
 import Wrapper from '../../components/Wrapper'
 import Link from '../../components/Link'
 import Button from '../../components/Button'
+import CardElementWrapper from '../../components/CardElementWrapper'
+import OrderPlaced from '../../components/OrderPlaced'
 
 const stripeLib = loadStripe(process.env.REACT_APP_PUBLIC_STRIPE_KEY ?? '')
 
@@ -38,12 +42,18 @@ function CheckoutForm(): JSX.Element {
     }
   }
 
+  const totalPrice = useMemo(() => {
+    return cartItems.reduce((sum, item) => {
+      return sum + item.price
+    }, 0)
+  }, [cartItems])
+
   if (isOrderPlaced) {
     return (
-      <div>
-        <h2>Order placed! Go back to Products page to buy more!</h2>
-        <Link to="/" replace>go back</Link>
-      </div>
+      <OrderPlaced>
+        <h2>Order placed! Go back to Products page and buy more!</h2>
+        <Link to="/" replace>Go back</Link>
+      </OrderPlaced>
     )
   }
 
@@ -51,12 +61,10 @@ function CheckoutForm(): JSX.Element {
     <Wrapper>
       <Link to="/cart"><ArrowLeft /> Back</Link>
       <h1>Checkout</h1>
-      {cartItems.map((product, index: number) => (
-        <div key={`item_${product.id}_${index}`}>
-          <h3>{product.title}</h3>
-        </div>
-      ))}
-      <CardElement />
+      <h2>{formatCurrency(totalPrice)}</h2>
+      <CardElementWrapper>
+        <CardElement />
+      </CardElementWrapper>
       {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
       <Button onClick={placeOrder}>check out now</Button>
     </Wrapper>
