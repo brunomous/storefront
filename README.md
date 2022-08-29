@@ -1,6 +1,6 @@
 # Storefront
 
-[Demo](), deployed using [Vercel](https://vercel.com/).
+[Demo](https://storefront-swart.vercel.app/), deployed using [Vercel](https://vercel.com/).
 
 ## Libraries used
 
