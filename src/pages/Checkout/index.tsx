@@ -18,12 +18,14 @@ import Link from '../../components/Link'
 import Button from '../../components/Button'
 import CardElementWrapper from '../../components/CardElementWrapper'
 import OrderPlaced from '../../components/OrderPlaced'
+import ErrorMessage from '../../components/ErrorMessage'
 
 const stripeLib = loadStripe(process.env.REACT_APP_PUBLIC_STRIPE_KEY ?? '')
 
 function CheckoutForm(): JSX.Element {
   const [isLoadingCheckout, setIsLoadingCheckout] = useState<boolean>(false)
   const [isOrderPlaced, setIsOrderPlaced] = useState<boolean>(false)
+  const [errorMessage, setErrorMessage] = useState<string>('')
 
   const { cartItems, clearCart } = useCartContext()
 
@@ -34,12 +36,16 @@ function CheckoutForm(): JSX.Element {
     if (stripe !== null) {
       setIsLoadingCheckout(true)
 
-      const { paymentMethod } = await stripe.createPaymentMethod({
+      const { error, paymentMethod } = await stripe.createPaymentMethod({
         type: 'card',
         card: (elements?.getElement(CardElement) as StripeCardElement),
       })
 
       setIsLoadingCheckout(false)
+
+      if (error !== undefined) {
+        setErrorMessage('Payment error. Check your credit card info and try again.')
+      }
 
       if (paymentMethod !== undefined) {
         setIsOrderPlaced(true)
@@ -68,6 +74,7 @@ function CheckoutForm(): JSX.Element {
       <Link to="/cart"><ArrowLeft /> Back</Link>
       <h1>Checkout</h1>
       <h2>{formatCurrency(totalPrice)}</h2>
+      {Boolean(errorMessage) && <ErrorMessage>{errorMessage}</ErrorMessage>}
       <CardElementWrapper>
         <CardElement />
       </CardElementWrapper>
